@@ -267,11 +267,6 @@
         maxScale = 4;
     }
     
-    // Image is smaller than screen so no zooming!
-    if (xScale >= 2.5 && yScale >= 2.5) {
-        minScale = 1.0;
-    }
-    
     // Set min/max zoom
     self.maximumZoomScale = maxScale * minScale;
     self.minimumZoomScale = minScale;
