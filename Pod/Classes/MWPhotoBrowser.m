@@ -189,6 +189,10 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         [self.view addGestureRecognizer:swipeGesture];
     }
     
+    //use to show/hide navigation bar
+    UITapGestureRecognizer *imageTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleNavBar:)];
+    [self.view addGestureRecognizer:imageTapGesture];
+    
 	// Super
     [super viewDidLoad];
 	
@@ -216,6 +220,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         [_doneButton setTitleTextAttributes:[NSDictionary dictionary] forState:UIControlStateNormal];
         [_doneButton setTitleTextAttributes:[NSDictionary dictionary] forState:UIControlStateHighlighted];
         self.navigationItem.rightBarButtonItem = _doneButton;
+        
     } else {
         // We're not first so show back button
         UIViewController *previousViewController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
@@ -473,6 +478,17 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
             _previousViewControllerBackButton = nil;
         }
     }
+}
+
+- (void)toggleNavBar:(UITapGestureRecognizer *)gesture {
+    BOOL barsHidden = self.navigationController.navigationBar.hidden;
+    [self.navigationController setNavigationBarHidden:!barsHidden animated:YES];
+}
+
+#pragma mark - Gesture Recognizers
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
 
 #pragma mark - Layout
