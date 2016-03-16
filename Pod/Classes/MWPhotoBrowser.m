@@ -396,6 +396,8 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 
 - (void)viewWillDisappear:(BOOL)animated {
     
+    UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
+    
     // Detect if rotation occurs while we're presenting a modal
     _pageIndexBeforeRotation = _currentPageIndex;
     
@@ -483,6 +485,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 - (void)toggleNavBar:(UITapGestureRecognizer *)gesture {
     BOOL barsHidden = self.navigationController.navigationBar.hidden;
     [self.navigationController setNavigationBarHidden:!barsHidden animated:YES];
+    UIApplication.sharedApplication().setStatusBarHidden(barsHidden, withAnimation: .Fade)
 }
 
 #pragma mark - Gesture Recognizers
